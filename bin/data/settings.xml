@@ -3,118 +3,46 @@
 </global>
 <leds>
     <hub>
-        <port>COM17</port>
+        <port>COM34</port>
+        <baudRate>115200</baudRate>
         <plug>
             <strip>
-                <startX>0.867449641</startX>
-                <startY>0.678331077</startY>
-                <endX>0.805369139</endX>
-                <endY>0.822341859</endY>
-                <numLeds>1000</numLeds>
+                <startX>0.078455791</startX>
+                <startY>0.930939198</startY>
+                <endX>0.103362389</endX>
+                <endY>0.167127073</endY>
+                <numLeds>15</numLeds>
                 <shape>0</shape>
             </strip>
             <strip>
-                <startX>0.718120813</startX>
-                <startY>0.921938062</startY>
-                <endX>0.609060407</endX>
-                <endY>0.818304181</endY>
-                <numLeds>1000</numLeds>
+                <startX>0.257783324</startX>
+                <startY>0.433701664</startY>
+                <endX>0.323785812</endX>
+                <endY>0.392265171</endY>
+                <numLeds>15</numLeds>
                 <shape>0</shape>
             </strip>
             <strip>
-                <startX>0.776845634</startX>
-                <startY>0.666218042</startY>
-                <endX>0.756711423</endX>
-                <endY>0.515477777</endY>
-                <numLeds>1000</numLeds>
-                <shape>1</shape>
-            </strip>
-            <strip>
-                <startX>0.679162085</startX>
-                <startY>0.410299003</startY>
-                <endX>0.500551283</endX>
-                <endY>0.408637881</endY>
-                <numLeds>1000</numLeds>
+                <startX>0.376089662</startX>
+                <startY>0.882596672</startY>
+                <endX>0.484433383</endX>
+                <endY>0.136740327</endY>
+                <numLeds>15</numLeds>
                 <shape>0</shape>
             </strip>
         </plug>
         <plug>
             <strip>
-                <startX>0.471476495</startX>
-                <startY>0.807537019</startY>
-                <endX>0.468750000</endX>
-                <endY>0.449999988</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
-        <plug>
-            <strip>
-                <startX>0.466372669</startX>
-                <startY>0.921926916</startY>
-                <endX>0.740904093</endX>
-                <endY>0.426910311</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
-        <plug>
-            <strip>
-                <startX>0.455347300</startX>
-                <startY>0.916943550</startY>
-                <endX>0.208379269</endX>
-                <endY>0.455149502</endY>
-                <numLeds>1000</numLeds>
+                <startX>0.622664988</startX>
+                <startY>0.288674027</startY>
+                <endX>0.773349941</endX>
+                <endY>0.848066270</endY>
+                <numLeds>50</numLeds>
                 <shape>0</shape>
             </strip>
         </plug>
         <plug></plug>
         <plug></plug>
-        <plug></plug>
-        <plug></plug>
-    </hub>
-    <hub>
-        <port>COM18</port>
-        <plug>
-            <strip>
-                <startX>0.473437488</startX>
-                <startY>0.197916672</startY>
-                <endX>0.468750000</endX>
-                <endY>0.358333319</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
-        <plug>
-            <strip>
-                <startX>0.306250006</startX>
-                <startY>0.406250000</startY>
-                <endX>0.428124994</endX>
-                <endY>0.402083337</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
-        <plug>
-            <strip>
-                <startX>0.460937500</startX>
-                <startY>0.058333334</startY>
-                <endX>0.215625003</endX>
-                <endY>0.412499994</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
-        <plug>
-            <strip>
-                <startX>0.509374976</startX>
-                <startY>0.089583330</startY>
-                <endX>0.720312476</endX>
-                <endY>0.406250000</endY>
-                <numLeds>1000</numLeds>
-                <shape>0</shape>
-            </strip>
-        </plug>
         <plug></plug>
         <plug></plug>
         <plug></plug>

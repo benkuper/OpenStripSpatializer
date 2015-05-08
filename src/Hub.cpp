@@ -2,13 +2,17 @@
 #include "Hub.h"
 
 
+
+
 Hub::Hub(ofxXmlSettings settings, int hubIndex, ofColor color)
 {
 	init();
+	realNumPlugs = 0;
 	hubColor = color;
 	this->hubIndex = hubIndex;
-
 	loadSettings(settings,hubIndex);
+	connect();
+
 	updatePositions();
 }
 
@@ -30,10 +34,18 @@ void Hub::init()
 	updatePositions();
 }
 
+void Hub::connect()
+{
+	printf("Hub init \n");
+	printf("open at baud rate :%i\n",baudRate);
+	serialOpened = serial.setup(port,baudRate);
+	printf(" > Serial opened (%s) ? %i\n",port.c_str(),serialOpened?1:0);
+}
+
 
 void Hub::draw(int baseIndex, ofPixels * pixels)
 {
-	for(int i=0;i<numPlugs;i++) 
+	for(int i=0;i<realNumPlugs;i++) 
 	{
 		plugs[i]->draw(baseIndex, pixels,hubColor);	
 		baseIndex += plugs[i]->ledCount;
@@ -79,7 +91,7 @@ void Hub::updatePositions()
 
 void Hub::updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels)
 {
-	for(int i=0;i<numPlugs;i++) 
+	for(int i=0;i<realNumPlugs;i++) 
 	{
 		plugs[i]->updateLedMap(baseIndex,ledMapPixels);
 		baseIndex += plugs[i]->ledCount;
@@ -88,18 +100,20 @@ void Hub::updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels)
 
 void Hub::updateLedsSerial()
 {
+	//printf("Hub updateLedsSerial\n");
 	float m0 = ofGetElapsedTimef();
 
 	const int numBytes = (numPlugs*HubPlug::maxLedPerPlug)*3+1; //3bytes per led + 255 final byte
+	const int realNumBytes = (realNumPlugs*HubPlug::maxLedPerPlug)*3+1;
 
 	unsigned char buffer[numBytes];// = new unsigned char[totalLeds*3];
 	memset(buffer,0,numBytes);
 
-	//printf("total numBytes:%i\n",numBytes);
-	for(int i=0;i<numPlugs;i++) plugs[i]->updateLedsSerial(buffer);
+	printf("total plugs /bytes : %i %i\n",realNumPlugs,realNumBytes);
+	for(int i=0;i<realNumPlugs;i++) plugs[i]->updateLedsSerial(buffer);
 
 
-	buffer[numBytes-1] = 255;
+	buffer[realNumBytes-1] = 255;
 
 	float elapsed0 = ofGetElapsedTimef() - m0;
 	//printf("Buffer fill : %f micros\n",elapsed0);
@@ -109,10 +123,14 @@ void Hub::updateLedsSerial()
 		//printf("Hub on port : %s	is not initialized, not sending.\n",port.c_str());
 		return;
 	}
+	
+	for(int i=0;i<realNumBytes;i++) printf("%i",buffer[i]);
+	
 	unsigned long long m1 = ofGetElapsedTimeMicros();
-	serial.writeBytes(buffer,numBytes);
+	serial.writeBytes(buffer,realNumBytes);
 	unsigned long long elapsed = ofGetElapsedTimeMicros() - m1;
-	//printf("Serial write : %llu micros\n",elapsed);
+	
+	printf("Serial write : %llu micros\n",elapsed);
 	
 }
 
@@ -122,6 +140,7 @@ void Hub::saveSettings(ofxXmlSettings settings)
 
 	settings.pushTag("hub",settings.getNumTags("hub")-1);
 	settings.addValue("port",port);
+	settings.addValue("baudRate",baudRate);
 	for(int i=0;i<numPlugs;i++) plugs[i]->saveSettings(settings);
 	settings.popTag();
 
@@ -134,23 +153,26 @@ void Hub::loadSettings(ofxXmlSettings settings, int hubIndex)
 
 	settings.pushTag("hub",hubIndex);
 
-	int loadedStrips = settings.getNumTags("strip");
-	for(int i=0;i<numPlugs;i++)  plugs[i]->loadSettings(settings,i);
+
+	realNumPlugs = settings.getNumTags("plug");
+	for(int i=0;i<realNumPlugs;i++)  
+	{
+		bool plugLoaded = plugs[i]->loadSettings(settings,i);
+	}
 
 	port = settings.getValue("port","COM1");
 	baudRate = settings.getValue("baudRate",9600);
-	
+	printf("Baud rate : %i\n",baudRate);
 	settings.popTag();
 
-	//serialOpened = serial.setup(port,baudRate);
-	printf("Serial opened (%s) ? %i\n",port.c_str(),serialOpened?1:0);
+	
 
 }
 
 void Hub::updateLedCount()
 {
 	ledCount = 0;
-	for(int i=0;i<numPlugs;i++)
+	for(int i=0;i<realNumPlugs;i++)
 	{
 		plugs[i]->updateLedCount();
 		ledCount += plugs[i]->ledCount;

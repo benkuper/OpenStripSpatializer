@@ -9,6 +9,7 @@ public :
 	int hubIndex;
 
 	static const int numPlugs = 8; //OctoWS2811 = 8 output pins
+	int realNumPlugs;
 	vector<HubPlug *>plugs;
 
 	int ledCount;
@@ -27,6 +28,7 @@ public :
 	Hub::Hub(int hubIndex, string port, int baudRate, ofColor color);
 	~Hub();
 
+	
 	void draw(int baseIndex, ofPixels * pixels);
 
 	void addStrip(int plugIndex);
@@ -43,7 +45,7 @@ public :
 	void updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels);
 
 	void updateLedsSerial();
-	void updateLedsArtNet();
+	//void updateLedsArtNet();
 
 	void saveSettings(ofxXmlSettings settings);
 	void loadSettings(ofxXmlSettings settings, int hubIndex);
@@ -54,4 +56,6 @@ public :
 
 private:
 	void init();
+	void connect();
+
 };

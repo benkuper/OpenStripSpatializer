@@ -9,8 +9,8 @@ bool LedManager::showHandles = true;
 bool LedManager::showContour = false;
 bool LedManager::updateLeds = true;
 bool LedManager::assignLeds = true;
-bool LedManager::useSerial = false;
-bool LedManager::useArtNet = true;
+bool LedManager::useSerial = true;
+bool LedManager::useArtNet = false;
 
 LedManager::LedManager()
 {
@@ -19,10 +19,11 @@ LedManager::LedManager()
 
 	dragging = false;
 
-	string comPorts[3] = {"COM17","COM18","COM13"}; //must initialized with same length as numHubs
+	//string comPorts[3] = {"COM17","COM18","COM13"}; //must initialized with same length as numHubs
 	ofColor colors[3] = {ofColor::orangeRed,ofColor::aliceBlue,ofColor::forestGreen};
 	
 	//for(int i=0;i<1;i++) addHub(comPorts[i],460800,colors[i]);
+	
 	
 	fbo.allocate(256,256);
 	ledShader.load("LedShader/shader");
@@ -108,9 +109,10 @@ void LedManager::draw(ofTexture * sourceTexture)
 	sourceTexture->unbind();
 	fbo.end();
 	
-	//fbo.draw(10,ofGetHeight()-266,256,256);
-	//ledMapImage.draw(10,10,200,200);
-
+	/*
+	fbo.draw(10,ofGetHeight()-266,256,256);
+	ledMapImage.draw(10,10,200,200);
+	*/
 	
 	fbo.readToPixels(ledPixels);
 	int baseIndex = 0;
@@ -151,13 +153,13 @@ void LedManager::mouseReleased()
 
 void LedManager::updatePositions()
 {
-	printf("Updat epositions");
+	printf("Update positions");
 	for (int i=0;i<numHubs;i++) hubs[i]->updatePositions();
 }
 
 void LedManager::updateLedMap()
 {
-	printf("UPDATE LED MAP \n");
+	//printf("UPDATE LED MAP \n");
 
 	int index = 0;
 	for (int i=0;i<numHubs;i++) 
@@ -171,13 +173,16 @@ void LedManager::updateLedMap()
 
 void LedManager::updateLedsSerial()
 {
+	//printf("Update leds serial\n");
 	for (int i=0;i<numHubs;i++) hubs[i]->updateLedsSerial();
 }
 
+/*
 void LedManager::updateLedsArtNet()
 {
 	for (int i=0;i<numHubs;i++) hubs[i]->updateLedsArtNet();
 }
+*/
 
 void LedManager::saveSettings(ofxXmlSettings settings)
 {
@@ -227,7 +232,7 @@ void LedManager::onUpdateTimer(ofEventArgs &e)
 	//printf("timer diff : %f\n",curTime-lastUpdateTime);
 	
 	if(useSerial) updateLedsSerial();
-	if(useArtNet) updateLedsArtNet();
+	//if(useArtNet) updateLedsArtNet();
 	lastUpdateTime = curTime;
 }
 

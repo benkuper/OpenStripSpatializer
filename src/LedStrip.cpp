@@ -156,15 +156,12 @@ void LedStrip::mouseReleased()
 
 void LedStrip::updateLedsSerial(unsigned char * buffer, int offset)
 {
-	//TEMP
-	return;//
-
 	for(int i=0;i<numLeds;i++) 
 	{
 		int ledOffset = offset+(i*3);
-		//printf("set at buffer : %i, %i	%i	%i\n",ledOffset,(int)(ofClamp(leds[i]->color.r,0,254)),(int)(ofClamp(leds[i]->color.g,0,254)),(int)(ofClamp(leds[i]->color.b,0,254)));
+		printf("set at buffer : %i, %i	%i	%i\n",ledOffset,(int)(ofClamp(leds[i]->color.r,0,254)),(int)(ofClamp(leds[i]->color.g,0,254)),(int)(ofClamp(leds[i]->color.b,0,254)));
 		
-		buffer[ledOffset] =   (unsigned char)(ofClamp(leds[i]->color.r,0,254));
+		buffer[ledOffset]	= (unsigned char)(ofClamp(leds[i]->color.r,0,254));
 		buffer[ledOffset+1] = (unsigned char)(ofClamp(leds[i]->color.g,0,254));
 		buffer[ledOffset+2] = (unsigned char)(ofClamp(leds[i]->color.b,0,254));
 	}

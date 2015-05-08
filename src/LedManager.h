@@ -53,7 +53,7 @@ public :
 	void setSendRate(int sendRate);
 	void onUpdateTimer(ofEventArgs &e);
 	void updateLedsSerial();
-	void updateLedsArtNet();
+	//void updateLedsArtNet();
 
 
 	void saveSettings(ofxXmlSettings settings);

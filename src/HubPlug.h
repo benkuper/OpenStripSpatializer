@@ -6,7 +6,7 @@
 class HubPlug
 {
 public:
-	static const int maxLedPerPlug = 300; // Set in arduino code, current is 300 (see arduino Code)
+	static const int maxLedPerPlug = 60; // Set in arduino code, current is 300 (see arduino Code)
 
 	int plugIndex;
 	int numStrips;
@@ -32,7 +32,7 @@ public:
 
 
 	void saveSettings(ofxXmlSettings settings);
-	void loadSettings(ofxXmlSettings settings, int plugIndex);
+	bool loadSettings(ofxXmlSettings settings, int plugIndex);
 
 	void clear();
 

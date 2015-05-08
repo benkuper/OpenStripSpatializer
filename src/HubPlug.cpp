@@ -5,7 +5,6 @@
 HubPlug::HubPlug(int index)
 {
 	numStrips = 0;
-
 	plugIndex = index;
 }
 
@@ -61,11 +60,14 @@ void HubPlug::saveSettings(ofxXmlSettings settings)
 	settings.popTag();
 }
 
-void HubPlug::loadSettings(ofxXmlSettings settings, int plugIndex)
+bool HubPlug::loadSettings(ofxXmlSettings settings, int plugIndex)
 {
 	clear();
 
-	settings.pushTag("plug",plugIndex);
+
+	bool result = settings.pushTag("plug",plugIndex);
+
+	if(!result) return false;
 
 	int loadedStrips = settings.getNumTags("strip");
 	for(int i=0;i<loadedStrips;i++)
@@ -76,6 +78,8 @@ void HubPlug::loadSettings(ofxXmlSettings settings, int plugIndex)
 		
  
 	settings.popTag();
+
+	return true;
 }
 
 
@@ -114,7 +118,7 @@ void HubPlug::updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels)
 void HubPlug::updateLedsSerial(unsigned char * buffer)
 {
 	int offset = plugIndex*(maxLedPerPlug*3); //(3 bytes per led
-	//printf("Offset for plug %i is %i\n",plugIndex,offset);
+	printf("Offset for plug %i is %i, numStrips :%i\n",plugIndex,offset,numStrips);
 	
 	int curStripLedsOffset = 0;
 
@@ -125,7 +129,7 @@ void HubPlug::updateLedsSerial(unsigned char * buffer)
 	}
 
 	
-	//printf("Led count for fill in is %i\n",ledCount);
+	printf("Led count for fill in is %i // diff = %i\n",ledCount,maxLedPerPlug-ledCount);
 	for(int i= ledCount;i<maxLedPerPlug;i++) //fill in for the rest of the plug (i.e., if only 20 leds are used, fill with 280 byte so the next plug is addressing right)	
 	{
 		int ledOffset = offset + (i*3);
