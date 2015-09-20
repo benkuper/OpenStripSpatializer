@@ -286,7 +286,6 @@
     <ClInclude Include="src\ofxTimer.h" />
     <ClInclude Include="src\SerialHub.h" />
     <ClInclude Include="src\SpoutManager.h" />
-    <ClInclude Include="src\SpoutToPixelThread.h" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\..\libs\openFrameworksCompiled\project\vs\openframeworksLib.vcxproj">

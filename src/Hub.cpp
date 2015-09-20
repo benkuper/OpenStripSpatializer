@@ -96,7 +96,7 @@ void Hub::updateLeds()
 	unsigned char buffer[numBytes];// = new unsigned char[totalLeds*3];
 	memset(buffer,0,numBytes);
 
-	printf("total plugs /bytes : %i %i\n",realNumPlugs,realNumBytes);
+	//printf("total plugs /bytes : %i %i\n",realNumPlugs,realNumBytes);
 	for(int i=0;i<realNumPlugs;i++) plugs[i]->updateLeds(buffer);
 
 
@@ -135,7 +135,7 @@ void Hub::saveSettingsInternal(ofxXmlSettings settings)
 
 void Hub::loadSettings(ofxXmlSettings settings, int hubIndex)
 {
-	printf("Load settings\n");
+	//printf("Load settings\n");
 	clear();
 
 	settings.pushTag("hub",hubIndex);

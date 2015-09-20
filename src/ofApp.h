@@ -5,7 +5,6 @@
 
 #include "GUI.h"
 #include "LedManager.h"
-#include "SpoutToPixelThread.h"
 
 #ifdef _WIN32
 #include "SpoutManager.h"	// Spout SDK

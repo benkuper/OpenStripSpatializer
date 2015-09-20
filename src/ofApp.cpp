@@ -44,26 +44,22 @@ void ofApp::draw(){
     #ifdef _WIN32
 	bool spoutReceiveOK = spout.receiveTexture();
 
+	ofTexture * targetTex = NULL;
+
+
 	if(showTexture && spoutReceiveOK)
 	{	
+		targetTex = &spout.myTexture;
 		spout.myTexture.draw(0, 0, ofGetWidth(),ofGetHeight());
 	
 	}
+	 #endif
 
-	/*
-	if(LedManager::updateLeds && spoutReceiveOK)
+	if(targetTex)
 	{
-		spout.receiveTexture(true,directPix);
-		//spout.myTexture.readToPixels(pixels);
-		if(spoutReceiveOK) pixels.setFromPixels(directPix,spout.myTexture.getWidth(),spout.myTexture.getHeight(),ofImageType::OF_IMAGE_COLOR);
-		//LEDS	
+		ledManager.draw(targetTex);
 	}
-	*/
-
-	//ledManager.draw(&pixels);
-	ledManager.draw(&spout.myTexture);
-    
-    #endif
+   
 
 	//TODO : move to a place where it's not calculated each time (event ?)
 	gui.numLedsLabel->setLabel("Led count : "+ofToString(ledManager.ledCount));
@@ -170,13 +166,13 @@ void ofApp::loadSettings(const std::string &file)
 {
 	fileName = file;
 
-	printf("Load Settings : %s\n",fileName.c_str());
+	//printf("Load Settings : %s\n",fileName.c_str());
 
 	ofxXmlSettings settings;
 
 	if(!ofFile::doesFileExist(fileName))
 	{
-		printf("File does not exists : %s\n",fileName.c_str());
+		ofLogWarning("File does not exists : %s\n",fileName.c_str());
 		//return;
 	}
 
@@ -199,7 +195,7 @@ void ofApp::loadSettings(const std::string &file)
 
 void ofApp::saveSettings()
 {
-	printf("Save settings [%s]....",fileName.c_str());
+	//printf("Save settings [%s]....",fileName.c_str());
 	ofxXmlSettings settings;
 	
 	settings.addTag("global");
@@ -212,10 +208,10 @@ void ofApp::saveSettings()
 	
 	string str;
 	settings.copyXmlToString(str);
-	printf("\n ***\n%s\n***\n",str.c_str());
+	//printf("\n ***\n%s\n***\n",str.c_str());
 	settings.saveFile(fileName); //puts settings.xml file in the bin/data folder
 	
-	printf("Saved !\n");
+	//printf("Saved !\n");
 }
 
 

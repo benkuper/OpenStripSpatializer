@@ -23,7 +23,6 @@ LedManager::LedManager()
 	
 	//for(int i=0;i<1;i++) addHub(comPorts[i],460800,colors[i]);
 	
-	
 	fbo.allocate(256,256);
 	ledShader.load("LedShader/shader");
 	
@@ -39,6 +38,7 @@ LedManager::LedManager()
 	setSendRate(50);
 	updatePositions();
 	ofAddListener(timer.TIMER_REACHED,this,&LedManager::onUpdateTimer);
+
 }
 
 Hub * LedManager::addHub(ofxXmlSettings settings, int hubIndex)
@@ -63,7 +63,6 @@ Hub * LedManager::addHub(ofxXmlSettings settings, int hubIndex)
 
 Hub * LedManager::addHub(int hubType, int hubIndex)
 {
-	
 	Hub * h = NULL;
 	switch(hubType)
 	{
@@ -80,8 +79,7 @@ Hub * LedManager::addHub(int hubType, int hubIndex)
 	h->init(hubIndex,ofColor::lightGreen);
 
 	hubs.push_back(h);
-	numHubs = hubs.size();	
-
+	numHubs = hubs.size();
 	
 	updateLedCount();
 
@@ -92,7 +90,6 @@ void LedManager::removeHub(int hubIndex)
 {
 	if(hubIndex == -1) hubIndex = numHubs-1;
 	if(hubIndex < numHubs && numHubs > 0) hubs.erase(hubs.begin()+hubIndex);
-
 	
 	numHubs = hubs.size();
 
@@ -107,8 +104,6 @@ void LedManager::draw(ofPixels * pixels)
 	//if(!showHandles && !showLines && !showLeds && !showLinks) return;
 
 	for (int i=0;i<numHubs;i++) hubs[i]->draw(pixels);
-
-	
 }
 */
 
@@ -130,12 +125,8 @@ void LedManager::draw(ofTexture * sourceTexture)
 	ledShader.end();
 	sourceTexture->unbind();
 	fbo.end();
-	
-	/*
-	fbo.draw(10,ofGetHeight()-266,256,256);
-	ledMapImage.draw(10,10,200,200);
-	*/
-	
+
+
 	fbo.readToPixels(ledPixels);
 	int baseIndex = 0;
 	for (int i=0;i<numHubs;i++) 

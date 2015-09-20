@@ -413,9 +413,6 @@
     <ClInclude Include="src\HubPlug.h">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\SpoutToPixelThread.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="src\SerialHub.h">
       <Filter>src</Filter>
     </ClInclude>

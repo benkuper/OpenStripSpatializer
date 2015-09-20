@@ -5,13 +5,13 @@
 
 SerialHub::SerialHub()
 {
-	printf("SerialHub constructor\n");
+	//printf("SerialHub constructor\n");
 }
 
 
 void SerialHub::init(int hubIndex, ofColor color)
 {
-	printf("SerialHub :: init\n");
+	//printf("SerialHub :: init\n");
 	Hub::init(hubIndex,color);
 	hubType = HUB_TYPE_SERIAL;
 
@@ -21,10 +21,10 @@ void SerialHub::init(int hubIndex, ofColor color)
 
 void SerialHub::connect()
 {
-	printf("SerialHub::connect\n");
-	printf("open at baud rate :%i\n",baudRate);
+	//printf("SerialHub::connect\n");
+	//printf("open at baud rate :%i\n",baudRate);
 	serialOpened = serial.setup(port,baudRate);
-	printf(" > Serial opened (%s) ? %i\n",port.c_str(),serialOpened?1:0);
+	//printf(" > Serial opened (%s) ? %i\n",port.c_str(),serialOpened?1:0);
 
 }
 
@@ -51,7 +51,7 @@ void SerialHub::loadSettingsInternal(ofxXmlSettings settings)
 {
 	port = settings.getValue("port","COM1");
 	baudRate = settings.getValue("baudRate",9600);
-}
+} 
 
 void SerialHub::saveSettingsInternal(ofxXmlSettings settings)
 {
@@ -62,6 +62,6 @@ void SerialHub::saveSettingsInternal(ofxXmlSettings settings)
 void SerialHub::clean()
 {
 	Hub::clean();
-	printf("Clean hub (%s)\n",port.c_str());
+	//printf("Clean hub (%s)\n",port.c_str());
 	serial.close();
 }
