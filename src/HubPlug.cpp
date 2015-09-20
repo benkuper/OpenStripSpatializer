@@ -28,7 +28,7 @@ void HubPlug::draw(int baseIndex, ofPixels * pixels,ofColor hubColor)
 				LedStrip * s = strips[i-1];
 				ofLine(s->end.x*w,s->end.y*h,strips[i]->start.x*w,strips[i]->start.y*h);
 				ofPopStyle();
-			}
+			}  
 		}
 	}
 }
@@ -115,21 +115,21 @@ void HubPlug::updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels)
 }
 
 
-void HubPlug::updateLedsSerial(unsigned char * buffer)
+void HubPlug::updateLeds(unsigned char * buffer)
 {
 	int offset = plugIndex*(maxLedPerPlug*3); //(3 bytes per led
-	printf("Offset for plug %i is %i, numStrips :%i\n",plugIndex,offset,numStrips);
+	//printf("Offset for plug %i is %i, numStrips :%i\n",plugIndex,offset,numStrips);
 	
 	int curStripLedsOffset = 0;
 
 	for(int i=0;i<numStrips;i++) 
 	{
-		strips[i]->updateLedsSerial(buffer,offset+curStripLedsOffset);
+		strips[i]->updateLeds(buffer,offset+curStripLedsOffset);
 		curStripLedsOffset += strips[i]->numLeds*3;
 	}
 
 	
-	printf("Led count for fill in is %i // diff = %i\n",ledCount,maxLedPerPlug-ledCount);
+	//printf("Led count for fill in is %i // diff = %i\n",ledCount,maxLedPerPlug-ledCount);
 	for(int i= ledCount;i<maxLedPerPlug;i++) //fill in for the rest of the plug (i.e., if only 20 leds are used, fill with 280 byte so the next plug is addressing right)	
 	{
 		int ledOffset = offset + (i*3);

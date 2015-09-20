@@ -2,15 +2,16 @@
 
 #include "LedManager.h"
 
+#include "SerialHub.h"
+#include "FireflyHub.h"
+
 bool LedManager::showLeds = true;
 bool LedManager::showLinks = true;
 bool LedManager::showLines = true;
 bool LedManager::showHandles = true;
 bool LedManager::showContour = false;
-bool LedManager::updateLeds = true;
+bool LedManager::doUpdateLeds = true;
 bool LedManager::assignLeds = true;
-bool LedManager::useSerial = true;
-bool LedManager::useArtNet = false;
 
 LedManager::LedManager()
 {
@@ -42,28 +43,51 @@ LedManager::LedManager()
 	ofAddListener(timer.TIMER_REACHED,this,&LedManager::onUpdateTimer);
 }
 
-void LedManager::addHub(ofxXmlSettings settings, int hubIndex)
+Hub * LedManager::addHub(ofxXmlSettings settings, int hubIndex)
 {
-	printf("Add Hub %i\n",hubIndex);
-		
-	//tmp
-	ofColor colors[3] = {ofColor::orangeRed,ofColor::aliceBlue,ofColor::forestGreen};
-	
-	hubs.push_back(new Hub(settings,hubIndex,colors[hubIndex]));
-	numHubs = hubs.size();	
-	printf("Add hub, new hub size %i\n",numHubs);
 
-	updateLedCount();
+	printf("Add hub with settings , new hub size %i\n",numHubs);
+
+	settings.pushTag("hub",hubIndex);
+	int hubType = settings.getValue("type",HUB_TYPE_SERIAL);
+	settings.popTag();
+
+	
+	Hub * h = addHub(hubType,hubIndex);
+	if(h == NULL) return NULL;
+
+	h->loadSettings(settings,hubIndex);
+	h->connect();
+
+	return h;
 }
 
-void LedManager::addHub(string port,int baudRate,ofColor color)
+
+Hub * LedManager::addHub(int hubType, int hubIndex)
 {
-	hubs.push_back(new Hub(numHubs,port,baudRate,color));
+	
+	Hub * h = NULL;
+	switch(hubType)
+	{
+	case HUB_TYPE_SERIAL:
+		h = new SerialHub();
+		break;
+	case HUB_TYPE_FIREFLY:
+		h = new FireflyHub();
+		break;
+	}
+
+	if(h == NULL) return NULL;
+
+	h->init(hubIndex,ofColor::lightGreen);
+
+	hubs.push_back(h);
 	numHubs = hubs.size();	
 
-	printf("Add hub, new hub size %i\n",numHubs);
-
+	
 	updateLedCount();
+
+	return h;
 }
 
 void LedManager::removeHub(int hubIndex)
@@ -153,7 +177,6 @@ void LedManager::mouseReleased()
 
 void LedManager::updatePositions()
 {
-	printf("Update positions");
 	for (int i=0;i<numHubs;i++) hubs[i]->updatePositions();
 }
 
@@ -171,18 +194,17 @@ void LedManager::updateLedMap()
 	ledMapImage.setFromPixels(ledMapPixels);
 }
 
-void LedManager::updateLedsSerial()
+void LedManager::updateLeds()
 {
 	//printf("Update leds serial\n");
-	for (int i=0;i<numHubs;i++) hubs[i]->updateLedsSerial();
+	for (int i=0;i<numHubs;i++) hubs[i]->updateLeds();
 }
 
-/*
-void LedManager::updateLedsArtNet()
+
+void LedManager::clear()
 {
-	for (int i=0;i<numHubs;i++) hubs[i]->updateLedsArtNet();
+	while(numHubs > 0) removeHub(0);
 }
-*/
 
 void LedManager::saveSettings(ofxXmlSettings settings)
 {
@@ -196,13 +218,18 @@ void LedManager::saveSettings(ofxXmlSettings settings)
 	
 }
 
+
+
 void LedManager::loadSettings(ofxXmlSettings settings)
 {
-	settings.pushTag("leds");
+	
+	clear();
 
+	settings.pushTag("leds");
+	
 	int loadedHubs = settings.getNumTags("hub");
 
-	printf("Loaded hubs %i\n",loadedHubs);
+	//printf("Loaded hubs %i\n",loadedHubs);
 
 	for(int i=0;i<loadedHubs;i++)
 	{
@@ -221,9 +248,12 @@ void LedManager::loadSettings(ofxXmlSettings settings)
 
 void LedManager::setSendRate(int sendRate)
 {
-	printf("ms delay = %f\n",(1000.00f/sendRate));
+	//printf("ms delay = %f\n",(1000.00f/sendRate));
+	this->sendRate = sendRate;
+	timer.reset();
 	timer.setup((1000.00f/sendRate),true);
 	timer.startTimer();
+	printf("Set send rate %i\n",sendRate);
 }
 
 void LedManager::onUpdateTimer(ofEventArgs &e)
@@ -231,8 +261,7 @@ void LedManager::onUpdateTimer(ofEventArgs &e)
 	float curTime = ofGetElapsedTimef();
 	//printf("timer diff : %f\n",curTime-lastUpdateTime);
 	
-	if(useSerial) updateLedsSerial();
-	//if(useArtNet) updateLedsArtNet();
+	updateLeds();
 	lastUpdateTime = curTime;
 }
 

@@ -1,0 +1,123 @@
+<global>
+    <sendRate>73</sendRate>
+</global>
+<leds>
+    <hub>
+        <type>2</type>
+        <remoteIP>200.200.1.21</remoteIP>
+        <remotePort>8888</remotePort>
+        <bonjourName>Firefly BK 01</bonjourName>
+        <plug>
+            <strip>
+                <label>G1 (Globule)</label>
+                <startX>0.835937500</startX>
+                <startY>0.172916666</startY>
+                <endX>0.945312560</endX>
+                <endY>0.306249291</endY>
+                <numLeds>80</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>G2 (Genouillette)</label>
+                <startX>0.351562500</startX>
+                <startY>0.635416687</startY>
+                <endX>0.468750000</endX>
+                <endY>0.779166639</endY>
+                <numLeds>80</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>G3</label>
+                <startX>0.312500000</startX>
+                <startY>0.191666663</startY>
+                <endX>0.407812178</endX>
+                <endY>0.322916776</endY>
+                <numLeds>80</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>M1 (Machine)</label>
+                <startX>0.882812500</startX>
+                <startY>0.506250024</startY>
+                <endX>0.781250000</endX>
+                <endY>0.650000215</endY>
+                <numLeds>60</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>M2 (Mobylette)</label>
+                <startX>0.445312500</startX>
+                <startY>0.360416681</startY>
+                <endX>0.348437488</endX>
+                <endY>0.477083176</endY>
+                <numLeds>60</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>M3 (Manivelle)</label>
+                <startX>0.876562476</startX>
+                <startY>0.720833361</startY>
+                <endX>0.760937452</endX>
+                <endY>0.868749976</endY>
+                <numLeds>60</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug>
+            <strip>
+                <label>P1 (Particule)</label>
+                <startX>0.067187503</startX>
+                <startY>0.714583337</startY>
+                <endX>0.148437530</endX>
+                <endY>0.818750024</endY>
+                <numLeds>30</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+		 <plug>
+            <strip>
+                <label>P2 (Pendule)</label>
+                <startX>0.067187503</startX>
+                <startY>0.714583337</startY>
+                <endX>0.148437530</endX>
+                <endY>0.818750024</endY>
+                <numLeds>30</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+    </hub>
+    <hub>
+        <type>2</type>
+        <remoteIP>200.200.1.20</remoteIP>
+        <remotePort>8888</remotePort>
+        <bonjourName>Firefly BK 02</bonjourName>
+        <plug>
+            <strip>
+                <label>P3 (Pellicule)</label>
+                <startX>0.067187503</startX>
+                <startY>0.714583337</startY>
+                <endX>0.148437530</endX>
+                <endY>0.818750024</endY>
+                <numLeds>30</numLeds>
+                <shape>2</shape>
+            </strip>
+        </plug>
+        <plug></plug>
+        <plug></plug>
+        <plug></plug>
+        <plug></plug>
+        <plug></plug>
+        <plug></plug>
+        <plug></plug>
+    </hub>
+</leds>

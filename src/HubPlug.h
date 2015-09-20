@@ -6,7 +6,7 @@
 class HubPlug
 {
 public:
-	static const int maxLedPerPlug = 60; // Set in arduino code, current is 300 (see arduino Code)
+	static const int maxLedPerPlug = 300; // Set in bento club, teensy max is 300 (see arduino Code)
 
 	int plugIndex;
 	int numStrips;
@@ -28,7 +28,7 @@ public:
 	void updatePositions();
 	void updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels);
 
-	void updateLedsSerial(unsigned char * buffer);
+	void updateLeds(unsigned char * buffer);
 
 
 	void saveSettings(ofxXmlSettings settings);

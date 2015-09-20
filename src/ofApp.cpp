@@ -87,6 +87,11 @@ void ofApp::keyPressed(int key)
 			loadSettings("settings_5.xml");
 			break;
 
+		case '6':
+			loadSettings("settings_6.xml");
+			break;
+
+
 		case 's':
 			saveSettings();
 			break;
@@ -173,7 +178,7 @@ void ofApp::loadSettings(const std::string &file)
 		ledManager.loadSettings(settings);
 
 		settings.pushTag("global");
-		ledManager.sendRate = settings.getValue("sendRate",ledManager.sendRate);
+		ledManager.setSendRate(settings.getValue("sendRate",ledManager.sendRate));
 		gui.setSendRate(ledManager.sendRate);
 		settings.popTag();
 	}
@@ -250,7 +255,7 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 			LedManager::showContour = e.getButton()->getValue();
 		}else if(strcmp(nameC,"Update Leds") == 0)
 		{
-			LedManager::updateLeds = !LedManager::updateLeds;
+			LedManager::doUpdateLeds = !LedManager::doUpdateLeds;
 		}else if(strcmp(nameC,"Assign Leds") == 0)
 		{
 			LedManager::assignLeds = !LedManager::assignLeds;

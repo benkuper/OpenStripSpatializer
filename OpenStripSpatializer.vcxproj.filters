@@ -250,6 +250,24 @@
     <ClCompile Include="src\HubPlug.cpp">
       <Filter>src</Filter>
     </ClCompile>
+    <ClCompile Include="src\SerialHub.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="src\FireflyHub.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPClient.cpp">
+      <Filter>addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPManager.cpp">
+      <Filter>addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxTCPServer.cpp">
+      <Filter>addons\ofxNetwork</Filter>
+    </ClCompile>
+    <ClCompile Include="..\..\..\addons\ofxNetwork\src\ofxUDPManager.cpp">
+      <Filter>addons\ofxNetwork</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="src">
@@ -293,6 +311,9 @@
     </Filter>
     <Filter Include="addons\ofxXmlSettings\libs">
       <UniqueIdentifier>{687714A8-1662-FA1C-261F-50F0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="addons\ofxNetwork">
+      <UniqueIdentifier>{d08d4ae4-3731-4cce-954d-7e9b61a8eb45}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -393,6 +414,12 @@
       <Filter>src</Filter>
     </ClInclude>
     <ClInclude Include="src\SpoutToPixelThread.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\SerialHub.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="src\FireflyHub.h">
       <Filter>src</Filter>
     </ClInclude>
   </ItemGroup>

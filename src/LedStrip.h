@@ -4,10 +4,10 @@
 #include "Led.h"
 
 #include "ofxXmlSettings.h"
-#include "ofSerial.h"
 
 #define SHAPE_LINE 0
 #define SHAPE_CIRCLE 1
+#define SHAPE_SQUARE 2
 
 class LedStrip{
 public :
@@ -25,6 +25,8 @@ public :
 
 	int shape;
 
+	string customLabel;
+
 	//methods
 
 	LedStrip::LedStrip(int plugIndex, int stripIndex, int shape = SHAPE_LINE);
@@ -38,7 +40,7 @@ public :
 	void updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels);
 
 
-	void updateLedsSerial(unsigned char * buffer, int offset);
+	void updateLeds(unsigned char * buffer, int offset);
 
 	void saveSettings(ofxXmlSettings settings);
 	void loadSettings(ofxXmlSettings settings, int stripIndex);

@@ -1,51 +1,32 @@
 <global>
-    <sendRate>30</sendRate>
+    <sendRate>70</sendRate>
 </global>
 <leds>
     <hub>
-        <port>COM34</port>
-        <baudRate>115200</baudRate>
+        <type>1</type>
+        <port>COM6</port>
+        <baudRate>9600</baudRate>
         <plug>
             <strip>
-                <startX>0.078455791</startX>
-                <startY>0.930939198</startY>
-                <endX>0.103362389</endX>
-                <endY>0.167127073</endY>
-                <numLeds>15</numLeds>
-                <shape>0</shape>
-            </strip>
-            <strip>
-                <startX>0.257783324</startX>
-                <startY>0.433701664</startY>
-                <endX>0.323785812</endX>
-                <endY>0.392265171</endY>
-                <numLeds>15</numLeds>
-                <shape>0</shape>
-            </strip>
-            <strip>
-                <startX>0.376089662</startX>
-                <startY>0.882596672</startY>
-                <endX>0.484433383</endX>
-                <endY>0.136740327</endY>
-                <numLeds>15</numLeds>
+                <label>Bento V3-1</label>
+                <startX>0.378125012</startX>
+                <startY>0.764583349</startY>
+                <endX>0.603124976</endX>
+                <endY>0.327083319</endY>
+                <numLeds>300</numLeds>
                 <shape>0</shape>
             </strip>
         </plug>
-        <plug>
+		<plug>
             <strip>
-                <startX>0.622664988</startX>
-                <startY>0.288674027</startY>
-                <endX>0.773349941</endX>
-                <endY>0.848066270</endY>
-                <numLeds>50</numLeds>
+                <label>Bento V3-2</label>
+                <startX>0.378125012</startX>
+                <startY>0.764583349</startY>
+                <endX>0.603124976</endX>
+                <endY>0.327083319</endY>
+                <numLeds>300</numLeds>
                 <shape>0</shape>
             </strip>
         </plug>
-        <plug></plug>
-        <plug></plug>
-        <plug></plug>
-        <plug></plug>
-        <plug></plug>
-        <plug></plug>
     </hub>
 </leds>

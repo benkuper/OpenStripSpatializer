@@ -1,0 +1,57 @@
+<global>
+    <sendRate>70</sendRate>
+</global>
+<leds>
+    <hub>
+        <type>2</type>
+        <remoteIP>192.168.2.10</remoteIP>
+        <remotePort>8888</remotePort>
+        <bonjourName>bentov3-1</bonjourName>
+        <plug>
+            <strip>
+                <label>Bento V3-1</label>
+				<startX>0.75</startX>
+                <startY>0.01</startY>
+                <endX>0.75</endX>
+                <endY>0.99</endY>
+               
+                <numLeds>29</numLeds>
+                <shape>0</shape>
+            </strip>
+        </plug>
+    </hub>
+    <hub>
+        <type>2</type>
+        <remoteIP>192.168.2.11</remoteIP>
+        <remotePort>8888</remotePort>
+        <bonjourName>bentov3-2</bonjourName>
+        <plug>
+            <strip>
+                <label>Bento V3-2</label>
+				 <startX>0.25</startX>
+                <startY>0.01</startY>
+                <endX>0.25</endX>
+                <endY>0.99</endY>
+                <numLeds>29</numLeds>
+                <shape>0</shape>
+            </strip>
+        </plug>
+    </hub>
+    <hub>
+        <type>2</type>
+        <remoteIP>192.168.2.12</remoteIP>
+        <remotePort>8888</remotePort>
+        <bonjourName>bentov3-3</bonjourName>
+        <plug>
+            <strip>
+                <label>Bento V3-3</label>
+                 <startX>0.5</startX>
+                <startY>0.01</startY>
+                <endX>0.5</endX>
+                <endY>0.99</endY>
+                <numLeds>29</numLeds>
+                <shape>0</shape>
+            </strip>
+        </plug>
+    </hub>
+</leds>

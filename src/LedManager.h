@@ -5,6 +5,7 @@
 #include "ofxXmlSettings.h"
 #include "ofxTimer.h"
 
+
 class LedManager{
 public :
 
@@ -40,8 +41,8 @@ public :
 	//void draw(ofPixels * pixels);
 	void draw(ofTexture * sourceTexture);
 
-	void addHub(ofxXmlSettings settings, int hubIndex);
-	void addHub(string port = "COM1", int comPort = 9600, ofColor color = ofColor::orangeRed);
+	Hub * addHub(ofxXmlSettings settings, int hubIndex);
+	Hub * addHub(int hubType, int hubIndex);
 	void removeHub(int hubIndex);
 
 	bool mousePressed(bool force);
@@ -52,9 +53,9 @@ public :
 
 	void setSendRate(int sendRate);
 	void onUpdateTimer(ofEventArgs &e);
-	void updateLedsSerial();
-	//void updateLedsArtNet();
+	void updateLeds();
 
+	void clear();
 
 	void saveSettings(ofxXmlSettings settings);
 	void loadSettings(ofxXmlSettings settings);
@@ -69,9 +70,6 @@ public :
 	static bool showLinks;
 	static bool showHandles;
 	static bool showContour;
-	static bool updateLeds;
+	static bool doUpdateLeds;
 	static bool assignLeds;
-
-	static bool useSerial;
-	static bool useArtNet;
 };

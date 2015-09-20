@@ -2,44 +2,32 @@
 #include "Hub.h"
 
 
-
-
-Hub::Hub(ofxXmlSettings settings, int hubIndex, ofColor color)
+Hub::Hub()
 {
-	init();
+	printf("Hub constructor\n");
+}
+
+void Hub::init(int hubIndex, ofColor color)
+{
+	printf("Hub init\n");
+	for(int i=0;i<numPlugs;i++) plugs.push_back(new HubPlug(i));
+	printf("--> Num plugs in hub : %i\n",plugs.size());
+	hubColor = color;
+
 	realNumPlugs = 0;
 	hubColor = color;
 	this->hubIndex = hubIndex;
-	loadSettings(settings,hubIndex);
-	connect();
+	//loadSettings(settings,hubIndex);
+	//connect();	
 
 	updatePositions();
 }
 
-Hub::Hub(int hubIndex, string port = "COM1", int baudRate = 9600,ofColor color = ofColor::peachPuff)
-{
-	init();
-
-	this->port = port;
-	this->baudRate = baudRate;
-	hubColor = color;
-
-	updatePositions();
-	
-}
-
-void Hub::init()
-{
-	for(int i=0;i<numPlugs;i++) plugs.push_back(new HubPlug(i));
-	updatePositions();
-}
 
 void Hub::connect()
 {
-	printf("Hub init \n");
-	printf("open at baud rate :%i\n",baudRate);
-	serialOpened = serial.setup(port,baudRate);
-	printf(" > Serial opened (%s) ? %i\n",port.c_str(),serialOpened?1:0);
+	printf("Hub connect \n");
+	
 }
 
 
@@ -98,7 +86,7 @@ void Hub::updateLedMap(int baseIndex, ofFloatPixels * ledMapPixels)
 	}
 }
 
-void Hub::updateLedsSerial()
+void Hub::updateLeds()
 {
 	//printf("Hub updateLedsSerial\n");
 	float m0 = ofGetElapsedTimef();
@@ -110,7 +98,7 @@ void Hub::updateLedsSerial()
 	memset(buffer,0,numBytes);
 
 	printf("total plugs /bytes : %i %i\n",realNumPlugs,realNumBytes);
-	for(int i=0;i<realNumPlugs;i++) plugs[i]->updateLedsSerial(buffer);
+	for(int i=0;i<realNumPlugs;i++) plugs[i]->updateLeds(buffer);
 
 
 	buffer[realNumBytes-1] = 255;
@@ -118,20 +106,15 @@ void Hub::updateLedsSerial()
 	float elapsed0 = ofGetElapsedTimef() - m0;
 	//printf("Buffer fill : %f micros\n",elapsed0);
 
-	if(!serial.isInitialized())
-	{
-		//printf("Hub on port : %s	is not initialized, not sending.\n",port.c_str());
-		return;
-	}
+	//printf("Update leds %i / %i / %i / %i\n",realNumPlugs,realNumBytes,numPlugs,numBytes);
+	sendLeds(buffer, realNumBytes);
 	
-	for(int i=0;i<realNumBytes;i++) printf("%i",buffer[i]);
-	
-	unsigned long long m1 = ofGetElapsedTimeMicros();
-	serial.writeBytes(buffer,realNumBytes);
-	unsigned long long elapsed = ofGetElapsedTimeMicros() - m1;
-	
-	printf("Serial write : %llu micros\n",elapsed);
-	
+}
+
+//
+void Hub::sendLeds(unsigned char * data, int length)
+{
+	//To be overriden by child classes (serial, firefly, etc.)
 }
 
 void Hub::saveSettings(ofxXmlSettings settings)
@@ -139,11 +122,16 @@ void Hub::saveSettings(ofxXmlSettings settings)
 	settings.addTag("hub");
 
 	settings.pushTag("hub",settings.getNumTags("hub")-1);
-	settings.addValue("port",port);
-	settings.addValue("baudRate",baudRate);
-	for(int i=0;i<numPlugs;i++) plugs[i]->saveSettings(settings);
-	settings.popTag();
+	settings.addValue("type",hubType);
 
+	saveSettingsInternal(settings);
+	for(int i=0;i<realNumPlugs;i++) plugs[i]->saveSettings(settings);
+	settings.popTag();
+}
+
+void Hub::saveSettingsInternal(ofxXmlSettings settings)
+{
+	//to be filled by child classes
 }
 
 void Hub::loadSettings(ofxXmlSettings settings, int hubIndex)
@@ -153,20 +141,23 @@ void Hub::loadSettings(ofxXmlSettings settings, int hubIndex)
 
 	settings.pushTag("hub",hubIndex);
 
-
+	plugLimit = settings.getValue("plugLimit",numPlugs);
 	realNumPlugs = settings.getNumTags("plug");
-	for(int i=0;i<realNumPlugs;i++)  
+	realNumPlugs = min(realNumPlugs,plugLimit);
+
+	for(int i=0;i<realNumPlugs && i < plugLimit;i++)  
 	{
 		bool plugLoaded = plugs[i]->loadSettings(settings,i);
 	}
 
-	port = settings.getValue("port","COM1");
-	baudRate = settings.getValue("baudRate",9600);
-	printf("Baud rate : %i\n",baudRate);
+	loadSettingsInternal(settings);
+
 	settings.popTag();
+}
 
-	
-
+void Hub::loadSettingsInternal(ofxXmlSettings settings)
+{
+	//to be filled with child
 }
 
 void Hub::updateLedCount()
@@ -181,8 +172,7 @@ void Hub::updateLedCount()
 
 void Hub::clean()
 {
-	printf("Clean hub (%s)\n",port.c_str());
-	serial.close();
+	
 }
 
 Hub::~Hub()
