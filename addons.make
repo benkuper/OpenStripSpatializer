@@ -1,2 +1,4 @@
 ofxOsc
 ofxXmlSettings
+ofxNetwork
+ofxUI
