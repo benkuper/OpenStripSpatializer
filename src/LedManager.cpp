@@ -1,5 +1,3 @@
-#pragma once
-
 #include "LedManager.h"
 
 #include "SerialHub.h"
@@ -29,10 +27,10 @@ LedManager::LedManager()
 	fbo.allocate(256,256);
 	ledShader.load("LedShader/shader");
 	
-	ledMapImage.allocate(256,256,ofImageType::OF_IMAGE_COLOR);
+	ledMapImage.allocate(256,256,OF_IMAGE_COLOR);
 
-	ledMapPixels.allocate(256,256,ofImageType::OF_IMAGE_COLOR);
-	ledPixels.allocate(256,256,ofImageType::OF_IMAGE_COLOR_ALPHA);
+	ledMapPixels.allocate(256,256,OF_IMAGE_COLOR);
+	ledPixels.allocate(256,256,OF_IMAGE_COLOR_ALPHA);
 
 	int imgSize = ledMapImage.width*ledMapImage.height;
 

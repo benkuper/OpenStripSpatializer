@@ -1,4 +1,3 @@
-#pragma once
 #include "Led.h"
 #include "LedManager.h"
 

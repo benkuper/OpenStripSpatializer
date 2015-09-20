@@ -1,14 +1,17 @@
 #pragma once
 
-
 #include "ofMain.h"
-#include "SpoutManager.h"	// Spout SDK
-#include "SpoutToPixelThread.h"
-#include "LedManager.h"
-
 #include "ofxXmlSettings.h"
-#include "GUI.h"
 
+#include "GUI.h"
+#include "LedManager.h"
+#include "SpoutToPixelThread.h"
+
+#ifdef _WIN32
+#include "SpoutManager.h"	// Spout SDK
+#elif MAC_OS_X_VERSION_10_6
+#include "ofxSyphon.h"
+#endif
 
 class ofApp : public ofBaseApp{
 
@@ -40,18 +43,18 @@ class ofApp : public ofBaseApp{
 		void saveSettings();
 
 		//Spout
+        #ifdef _WIN32
 		SpoutManager spout;
+        #elif MAC_OS_X_VERSION_10_6
+        ofxSyphonClient syphonClient;
+        #endif
+    
 		bool showTexture;
-
-		
 
 		//Leds -> to transfer to LedManager
 		LedManager ledManager;
 		ofPixels pixels;
 
 		unsigned char * directPix;
-
-		
-
 };
 

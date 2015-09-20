@@ -1,5 +1,3 @@
-#pragma once
-
 #include "LedStrip.h"
 #include "ofApp.h"
 #include "LedManager.h"
@@ -12,7 +10,7 @@ LedStrip::LedStrip(int plugIndex, int stripIndex, int shape)
 
 	numLeds = 0;
 
-	dragHandle = nullptr;
+	dragHandle = NULL;
 
 	start.x = (ofRandomf()*.5+.5)*ofGetWindowWidth();
 	start.y = (ofRandomf()*.5+.5)*ofGetWindowHeight();
@@ -128,7 +126,7 @@ void LedStrip::draw(int baseIndex,ofPixels * pixels,ofColor color)
 	float w = ofGetWidth()*1.0f;
 	float h = ofGetHeight()*1.0f;
 
-	if(dragHandle != nullptr)
+	if(dragHandle != NULL)
 	{
 		ofVec2f offset = start-end;
 		dragHandle->set(ofGetMouseX()/w,ofGetMouseY()/h);
@@ -230,14 +228,14 @@ bool LedStrip::mousePressed(bool force)
 	if(start.distance(mousePos) < .01f ||force) dragHandle = &start;
 	if(end.distance(mousePos) < .01f) dragHandle = &end;	
 
-	bool pressResult =  (dragHandle != nullptr && !force);
+	bool pressResult =  (dragHandle != NULL && !force);
 	return pressResult;
 
 }
 
 void LedStrip::mouseReleased()
 {
-	dragHandle = nullptr;	
+	dragHandle = NULL;
 }
 
 

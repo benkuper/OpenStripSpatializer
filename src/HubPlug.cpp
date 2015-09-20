@@ -1,4 +1,3 @@
-#pragma once
 #include "HubPlug.h"
 #include "LedManager.h"
 

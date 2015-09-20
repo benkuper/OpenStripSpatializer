@@ -5,25 +5,27 @@ void ofApp::setup(){
 
 	printf("OSS :: Open Strip Spatializer setup\n");
 	
-
 	ofSetWindowTitle("OSS :: Open Strip Spatializer");
 	ofSetWindowShape(640,480);			// Set the initial window size
 
 	//ofSetFrameRate(100);
 	
+    #ifdef WIN32
 	spout.setup();
-	
+    #elif MAC_OS_X_VERSION_10_6
+    syphonClient.setup();
+    //syphonClient.set("","")
+    #endif
 	
 	gui.setup();
 	ofAddListener(gui.panel->newGUIEvent,this,&ofApp::guiEvent);
 	ofAddListener(gui.ledPanel->newGUIEvent,this,&ofApp::guiEvent);
 
-
 	directPix = new unsigned char[1920*1080*3];
 
 	//Init with black
 	memset(directPix,0,1920*1080*3);
-	pixels.setFromPixels(directPix,1920,1080,ofImageType::OF_IMAGE_COLOR);
+	pixels.setFromPixels(directPix,1920,1080,OF_IMAGE_COLOR);
 
 	fileName = "settings.xml";
 	loadSettings(fileName);
@@ -39,7 +41,7 @@ void ofApp::draw(){
 
 	ofBackground(0);
 	
-	
+    #ifdef _WIN32
 	bool spoutReceiveOK = spout.receiveTexture();
 
 	if(showTexture && spoutReceiveOK)
@@ -60,6 +62,8 @@ void ofApp::draw(){
 
 	//ledManager.draw(&pixels);
 	ledManager.draw(&spout.myTexture);
+    
+    #endif
 
 	//TODO : move to a place where it's not calculated each time (event ?)
 	gui.numLedsLabel->setLabel("Led count : "+ofToString(ledManager.ledCount));
@@ -134,8 +138,12 @@ void ofApp::mouseDragged(int x, int y, int button){
 
 //--------------------------------------------------------------
 void ofApp::mousePressed(int x, int y, int button){
+    
+    #ifdef _WIN32
 	if(button == 2) spout.spoutreceiver->SelectSenderPanel("/DX11");
-	if(button == 0) ledManager.mousePressed(false);
+    #endif
+	
+    if(button == 0) ledManager.mousePressed(false);
 }
 
 //--------------------------------------------------------------
@@ -279,6 +287,8 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 
 void ofApp::exit()
 {
-	spout.exit();
+    #ifdef _WIN32
+    spout.exit();
+    #endif
 	
 }

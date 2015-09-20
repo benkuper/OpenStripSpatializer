@@ -29,7 +29,7 @@ public :
 
 	//methods
 
-	LedStrip::LedStrip(int plugIndex, int stripIndex, int shape = SHAPE_LINE);
+	LedStrip(int plugIndex, int stripIndex, int shape = SHAPE_LINE);
 	void draw(int baseIndex, ofPixels * pixels, ofColor color);
 	bool mousePressed(bool force);
 	void mouseReleased();

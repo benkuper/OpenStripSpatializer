@@ -1,4 +1,3 @@
-#pragma once
 #include "SerialHub.h"
 #include "ofMain.h"
 #include "Hub.h"

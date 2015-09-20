@@ -1,12 +1,13 @@
 #pragma once
 
 #include "ofMain.h"
-#include "Hub.h"
 #include "ofxXmlSettings.h"
+
 #include "ofxTimer.h"
+#include "Hub.h"
 
-
-class LedManager{
+class LedManager {
+    
 public :
 
 	int numHubs;
@@ -37,7 +38,7 @@ public :
 
 	//methods
 
-	LedManager::LedManager();
+	LedManager();
 	//void draw(ofPixels * pixels);
 	void draw(ofTexture * sourceTexture);
 

@@ -1,4 +1,3 @@
-#pragma once
 #include "Hub.h"
 
 
@@ -11,7 +10,7 @@ void Hub::init(int hubIndex, ofColor color)
 {
 	printf("Hub init\n");
 	for(int i=0;i<numPlugs;i++) plugs.push_back(new HubPlug(i));
-	printf("--> Num plugs in hub : %i\n",plugs.size());
+	printf("--> Num plugs in hub : %lu\n", plugs.size());
 	hubColor = color;
 
 	realNumPlugs = 0;

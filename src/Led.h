@@ -7,7 +7,7 @@ class Led : public ofVec2f{
 public :
 	ofColor color;
 
-	Led::Led();
+	Led();
 	int radius;
 
 	void draw();

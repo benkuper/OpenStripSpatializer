@@ -23,7 +23,7 @@ public :
 	int ledCount;
 
 	//methods
-	Hub::Hub();
+	Hub();
 	~Hub();
 
 	virtual void init(int hubIndex, ofColor color = ofColor::peachPuff);
@@ -55,8 +55,8 @@ public :
 	virtual void clean();
 
 protected :
-	virtual void Hub::loadSettingsInternal(ofxXmlSettings settings);
-	virtual void Hub::saveSettingsInternal(ofxXmlSettings settings);
+	virtual void loadSettingsInternal(ofxXmlSettings settings);
+	virtual void saveSettingsInternal(ofxXmlSettings settings);
 	
 
 };

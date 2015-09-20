@@ -1,6 +1,5 @@
 #pragma once
 #include "ofMain.h"
-#include "SpoutManager.h"
 
 class SpoutToPixelThread : public ofThread
 {
@@ -10,13 +9,13 @@ class SpoutToPixelThread : public ofThread
 	ofImage img;
 	ofShortPixels pixels;
 
-	SpoutToPixelThread::SpoutToPixelThread(ofTexture srcTex)
+	SpoutToPixelThread(ofTexture srcTex)
 	{
 		this->tex = srcTex;
 	}
 
 	// the thread function
-	void SpoutToPixelThread::threadedFunction()
+	void threadedFunction()
 	{
 		printf("Start thread !\n");
 		

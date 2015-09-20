@@ -1,5 +1,3 @@
-#pragma once
-
 #include "GUI.h"
 
 void GUI::setup()
@@ -7,21 +5,16 @@ void GUI::setup()
 	
 	panel = new ofxUISuperCanvas("Parameters [P]");
 
-
-
 	panel->setPosition(ofGetWindowWidth()-panel->getGlobalCanvasWidth()-10,10);
 	panel->setColorBack(ofxUIColor(100,50));
 	panel->setPadding(10);
 
-	
-	
 	/*
 	panel->setFontSize(ofxUIWidgetFontType::OFX_UI_FONT_SMALL,5);
 	panel->setFontSize(ofxUIWidgetFontType::OFX_UI_FONT_MEDIUM,7);
 	*/
 
 	frameRateLabel = panel->addLabel("Framerate");
-	
 	
 	panel->addToggle("Show Texture", true);
 
