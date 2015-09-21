@@ -200,7 +200,6 @@
 		63B7F5DF1BAEE7E500B19F8D /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
 		63B7F5E01BAEE7E500B19F8D /* ofxTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimer.cpp; sourceTree = "<group>"; };
 		63B7F5E11BAEE7E500B19F8D /* ofxTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimer.h; sourceTree = "<group>"; };
-		63B7F5E41BAEE7E500B19F8D /* SpoutToPixelThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpoutToPixelThread.h; sourceTree = "<group>"; };
 		63B7F5F01BAEFBDE00B19F8D /* FireflyHub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FireflyHub.cpp; sourceTree = "<group>"; };
 		63B7F5F11BAEFBDE00B19F8D /* FireflyHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireflyHub.h; sourceTree = "<group>"; };
 		63B7F5F21BAEFBDE00B19F8D /* SerialHub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialHub.cpp; sourceTree = "<group>"; };
@@ -835,7 +834,6 @@
 				63B7F5DF1BAEE7E500B19F8D /* ofApp.h */,
 				63B7F5E01BAEE7E500B19F8D /* ofxTimer.cpp */,
 				63B7F5E11BAEE7E500B19F8D /* ofxTimer.h */,
-				63B7F5E41BAEE7E500B19F8D /* SpoutToPixelThread.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;

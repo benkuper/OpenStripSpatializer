@@ -40,12 +40,10 @@ void ofApp::update(){
 void ofApp::draw(){
 
 	ofBackground(0);
-	
+	ofTexture * targetTex = NULL;
+    
     #ifdef _WIN32
 	bool spoutReceiveOK = spout.receiveTexture();
-
-	ofTexture * targetTex = NULL;
-
 
 	if(showTexture && spoutReceiveOK)
 	{	
@@ -53,7 +51,8 @@ void ofApp::draw(){
 		spout.myTexture.draw(0, 0, ofGetWidth(),ofGetHeight());
 	
 	}
-	 #endif
+    #elif MAC_OS_X_VERSION_10_6
+    #endif
 
 	if(targetTex)
 	{
