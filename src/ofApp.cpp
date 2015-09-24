@@ -7,7 +7,8 @@ void ofApp::setup(){
 	
 	ofSetWindowTitle("OSS :: Open Strip Spatializer");
 	ofSetWindowShape(640,480);			// Set the initial window size
-
+    
+    
 	//ofSetFrameRate(100);
 	
     #ifdef WIN32
@@ -29,6 +30,10 @@ void ofApp::setup(){
 
 	fileName = "settings.xml";
 	loadSettings(fileName);
+    
+    
+    
+    showTexture = true;
 }
 
 //--------------------------------------------------------------
@@ -48,19 +53,34 @@ void ofApp::draw(){
 	if(showTexture && spoutReceiveOK)
 	{	
 		targetTex = &spout.myTexture;
-		spout.myTexture.draw(0, 0, ofGetWidth(),ofGetHeight());
-	
+        
 	}
+    
     #elif MAC_OS_X_VERSION_10_6
+    
+    if(syphonClient.isSetup())
+    {
+        targetTex = &syphonClient.getTexture();
+    }
     #endif
 
 	if(targetTex)
 	{
-		ledManager.draw(targetTex);
+        
+#ifdef MAC_OS_X_VERSION_10_6
+        syphonClient.bind();
+#endif
+        
+      if(showTexture)  targetTex->draw(0,0,ofGetWidth(),ofGetHeight());
+
+      ledManager.draw(targetTex);
+        
+#ifdef MAC_OS_X_VERSION_10_6
+        syphonClient.unbind();
+#endif
 	}
    
-
-	//TODO : move to a place where it's not calculated each time (event ?)
+	// TODO : move to a place where it's not calculated each time (event ?)
 	gui.numLedsLabel->setLabel("Led count : "+ofToString(ledManager.ledCount));
 }
 

@@ -207,7 +207,7 @@ void LedStrip::draw(int baseIndex,ofPixels * pixels,ofColor color)
 			if(leds[i]->x < 1 && leds[i]->y < 1  && leds[i]->x >= 0 && leds[i]->y >= 0)
 			{
 
-				leds[i]->color.set(pix[pixIndex],pix[pixIndex+1],pix[pixIndex+2],255);
+				leds[i]->color.set(pix[pixIndex],pix[pixIndex+1],pix[pixIndex+2],pix[pixIndex+3]);
 			}else
 			{
 				leds[i]->color.set(0,100);
@@ -246,9 +246,10 @@ void LedStrip::updateLeds(unsigned char * buffer, int offset)
 		int ledOffset = offset+(i*3);
 		//printf("set at buffer : %i, %i	%i	%i\n",ledOffset,(int)(ofClamp(leds[i]->color.r,0,254)),(int)(ofClamp(leds[i]->color.g,0,254)),(int)(ofClamp(leds[i]->color.b,0,254)));
 		
-		buffer[ledOffset]	= (unsigned char)(ofClamp(leds[i]->color.r,0,254));
-		buffer[ledOffset+1] = (unsigned char)(ofClamp(leds[i]->color.g,0,254));
-		buffer[ledOffset+2] = (unsigned char)(ofClamp(leds[i]->color.b,0,254));
+        float ledAlpha = (float)((float)leds[i]->color.a/255.0);
+		buffer[ledOffset]	= (unsigned char)(ofClamp(leds[i]->color.r*ledAlpha,0,254));
+		buffer[ledOffset+1] = (unsigned char)(ofClamp(leds[i]->color.g*ledAlpha,0,254));
+		buffer[ledOffset+2] = (unsigned char)(ofClamp(leds[i]->color.b*ledAlpha,0,254));
 	}
 }
 
