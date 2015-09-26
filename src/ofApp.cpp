@@ -249,10 +249,27 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 	case OFX_UI_WIDGET_BUTTON:
 		if(strcmp(nameC,"Add Strip") == 0)
 		{
-			if( e.getButton()->getValue()) ledManager.hubs[0]->addStrip(0);
+            if( e.getButton()->getValue()) {
+             
+                if(!ledManager.hubs.empty()) {
+                 
+                    ledManager.hubs[0]->addStrip(0);
+                } else {
+                    
+                    // TODO : Should add default hub here ?
+                    //ledManager.addHub(<#ofxXmlSettings settings#>, <#int hubIndex#>)
+                    ofLogWarning("You should create a hub first!");
+                }
+            }
 		}else if(strcmp(nameC,"Remove Strip") == 0)
 		{
-			if( e.getButton()->getValue()) ledManager.hubs[0]->removeStrip(0);
+            if( e.getButton()->getValue()) {
+                
+                if(!ledManager.hubs.empty()) {
+                    
+                    ledManager.hubs[0]->removeStrip(0);
+                }
+            }
 		}
 		break;
 
