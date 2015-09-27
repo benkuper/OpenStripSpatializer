@@ -110,23 +110,41 @@ void LedManager::draw(ofPixels * pixels)
 void LedManager::draw(ofTexture * sourceTexture)
 {
 	//pass from source Texture to FBO with ledShader and then map the leds from the smaller generated texture
-
+    ofPushStyle();
+    
 	if(dragging) updateLedMap();
 
 	fbo.begin();
-	ofSetColor(255);
+	
+    ofSetColor(0);
+    ofRect(0, 0, fbo.getWidth(),fbo.getHeight());
+    
 	ledShader.begin();
+    
 	ledShader.setUniform2f("fboSize", fbo.getWidth(),fbo.getHeight());  // SET A UNIFORM
+    ledShader.setUniform2f("sourceSize",sourceTexture->getWidth(),sourceTexture->getHeight());
 	ledShader.setUniformTexture("sourceTex",*sourceTexture,1);
 	ledShader.setUniformTexture("ledMap",ledMapImage.getTextureReference(),2);
 
+    // OSX sucks. Need to inverse Y coords when using GL on OSX to get the right pixels from sourceTex
+    
+    #ifdef _WIN32
+    ledShader.setUniform1i("inverse", 0);
+    #elif MAC_OS_X_VERSION_10_6
+    ledShader.setUniform1i("inverse", 1);
+    #endif
+    
+    
+    ofSetColor(255);
 	ofRect(0, 0, fbo.getWidth(),fbo.getHeight());
 
 	ledShader.end();
 	sourceTexture->unbind();
 	fbo.end();
 
-
+    // Debug
+    //fbo.draw(0,ofGetHeight()- fbo.getHeight(),fbo.getWidth(),fbo.getHeight());
+    
 	fbo.readToPixels(ledPixels);
 	int baseIndex = 0;
 	for (int i=0;i<numHubs;i++) 
@@ -134,7 +152,8 @@ void LedManager::draw(ofTexture * sourceTexture)
 		hubs[i]->draw(baseIndex,&ledPixels);
 		baseIndex+= hubs[i]->ledCount;
 	}
-
+    
+    ofPopStyle();
 }
 
 

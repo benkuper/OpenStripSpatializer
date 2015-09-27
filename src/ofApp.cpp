@@ -7,7 +7,8 @@ void ofApp::setup(){
 	
 	ofSetWindowTitle("OSS :: Open Strip Spatializer");
 	ofSetWindowShape(640,480);			// Set the initial window size
-
+    
+    
 	//ofSetFrameRate(100);
 	
     #ifdef WIN32
@@ -29,6 +30,10 @@ void ofApp::setup(){
 
 	fileName = "settings.xml";
 	loadSettings(fileName);
+    
+    
+    
+    showTexture = true;
 }
 
 //--------------------------------------------------------------
@@ -40,28 +45,42 @@ void ofApp::update(){
 void ofApp::draw(){
 
 	ofBackground(0);
-	
+	ofTexture * targetTex = NULL;
+    
     #ifdef _WIN32
 	bool spoutReceiveOK = spout.receiveTexture();
-
-	ofTexture * targetTex = NULL;
-
 
 	if(showTexture && spoutReceiveOK)
 	{	
 		targetTex = &spout.myTexture;
-		spout.myTexture.draw(0, 0, ofGetWidth(),ofGetHeight());
-	
+        
 	}
-	 #endif
+    
+    #elif MAC_OS_X_VERSION_10_6
+    
+    if(syphonClient.isSetup())
+    {
+        targetTex = &syphonClient.getTexture();
+    }
+    #endif
 
 	if(targetTex)
 	{
-		ledManager.draw(targetTex);
+        
+#ifdef MAC_OS_X_VERSION_10_6
+        syphonClient.bind();
+#endif
+        
+      if(showTexture)  targetTex->draw(0,0,ofGetWidth(),ofGetHeight());
+
+      ledManager.draw(targetTex);
+        
+#ifdef MAC_OS_X_VERSION_10_6
+        syphonClient.unbind();
+#endif
 	}
    
-
-	//TODO : move to a place where it's not calculated each time (event ?)
+	// TODO : move to a place where it's not calculated each time (event ?)
 	gui.numLedsLabel->setLabel("Led count : "+ofToString(ledManager.ledCount));
 }
 
@@ -230,10 +249,27 @@ void ofApp::guiEvent(ofxUIEventArgs &e)
 	case OFX_UI_WIDGET_BUTTON:
 		if(strcmp(nameC,"Add Strip") == 0)
 		{
-			if( e.getButton()->getValue()) ledManager.hubs[0]->addStrip(0);
+            if( e.getButton()->getValue()) {
+             
+                if(!ledManager.hubs.empty()) {
+                 
+                    ledManager.hubs[0]->addStrip(0);
+                } else {
+                    
+                    // TODO : Should add default hub here ?
+                    //ledManager.addHub(<#ofxXmlSettings settings#>, <#int hubIndex#>)
+                    ofLogWarning("You should create a hub first!");
+                }
+            }
 		}else if(strcmp(nameC,"Remove Strip") == 0)
 		{
-			if( e.getButton()->getValue()) ledManager.hubs[0]->removeStrip(0);
+            if( e.getButton()->getValue()) {
+                
+                if(!ledManager.hubs.empty()) {
+                    
+                    ledManager.hubs[0]->removeStrip(0);
+                }
+            }
 		}
 		break;
 

@@ -77,6 +77,9 @@
 		63B7F8C71BAEFEE200B19F8D /* ofxUIWaveform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B7F85F1BAEFEE200B19F8D /* ofxUIWaveform.cpp */; };
 		63B7F8C81BAEFEE200B19F8D /* ofxUIWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B7F8611BAEFEE200B19F8D /* ofxUIWidget.cpp */; };
 		63B7F8C91BAEFEE200B19F8D /* ofxUIWidgetWithLabel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 63B7F8641BAEFEE200B19F8D /* ofxUIWidgetWithLabel.cpp */; };
+		63F0B3251BB71FD90018F890 /* settings.xml in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63F0B3241BB71FD90018F890 /* settings.xml */; };
+		63F0B3291BB7200B0018F890 /* shader.frag in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63F0B3271BB71FFA0018F890 /* shader.frag */; };
+		63F0B32A1BB7200D0018F890 /* shader.vert in CopyFiles */ = {isa = PBXBuildFile; fileRef = 63F0B3281BB71FFA0018F890 /* shader.vert */; };
 		640279EE111671BD026CB013 /* ofxOscReceiver.cpp in Sources */ = {isa = PBXBuildFile; fileRef = C2FAC65C491D4231379F3298 /* ofxOscReceiver.cpp */; };
 		67FE4C7B15C2F0478C8126C2 /* NetworkingUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 3B361208CD4107E479F04E7B /* NetworkingUtils.cpp */; };
 		72A929D3561B8232A182ABFC /* ofxOscBundle.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */; };
@@ -135,12 +138,24 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
+		63F0B3261BB71FDF0018F890 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = LedShader;
+			dstSubfolderSpec = 7;
+			files = (
+				63F0B3291BB7200B0018F890 /* shader.frag in CopyFiles */,
+				63F0B32A1BB7200D0018F890 /* shader.vert in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		A3FA15E81B6A1B3700E9DAEA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 7;
 			files = (
+				63F0B3251BB71FD90018F890 /* settings.xml in CopyFiles */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -200,7 +215,6 @@
 		63B7F5DF1BAEE7E500B19F8D /* ofApp.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofApp.h; sourceTree = "<group>"; };
 		63B7F5E01BAEE7E500B19F8D /* ofxTimer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxTimer.cpp; sourceTree = "<group>"; };
 		63B7F5E11BAEE7E500B19F8D /* ofxTimer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxTimer.h; sourceTree = "<group>"; };
-		63B7F5E41BAEE7E500B19F8D /* SpoutToPixelThread.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SpoutToPixelThread.h; sourceTree = "<group>"; };
 		63B7F5F01BAEFBDE00B19F8D /* FireflyHub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = FireflyHub.cpp; sourceTree = "<group>"; };
 		63B7F5F11BAEFBDE00B19F8D /* FireflyHub.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FireflyHub.h; sourceTree = "<group>"; };
 		63B7F5F21BAEFBDE00B19F8D /* SerialHub.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = SerialHub.cpp; sourceTree = "<group>"; };
@@ -310,6 +324,9 @@
 		63B7F8641BAEFEE200B19F8D /* ofxUIWidgetWithLabel.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ofxUIWidgetWithLabel.cpp; sourceTree = "<group>"; };
 		63B7F8651BAEFEE200B19F8D /* ofxUIWidgetWithLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWidgetWithLabel.h; sourceTree = "<group>"; };
 		63B7F8661BAEFEE200B19F8D /* ofxUIWrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ofxUIWrapper.h; sourceTree = "<group>"; };
+		63F0B3241BB71FD90018F890 /* settings.xml */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = settings.xml; path = bin/data/settings.xml; sourceTree = "<group>"; };
+		63F0B3271BB71FFA0018F890 /* shader.frag */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = shader.frag; path = bin/data/LedShader/shader.frag; sourceTree = SOURCE_ROOT; };
+		63F0B3281BB71FFA0018F890 /* shader.vert */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = shader.vert; path = bin/data/LedShader/shader.vert; sourceTree = SOURCE_ROOT; };
 		65EEFA3DA3526E9CDD9C21F9 /* ofxOscBundle.cpp */ = {isa = PBXFileReference; explicitFileType = sourcecode.cpp.cpp; fileEncoding = 30; name = ofxOscBundle.cpp; path = ../../../addons/ofxOsc/src/ofxOscBundle.cpp; sourceTree = SOURCE_ROOT; };
 		6B65E6930994CC4B2D2B8B33 /* OscPacketListener.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = OscPacketListener.h; path = ../../../addons/ofxOsc/libs/oscpack/src/osc/OscPacketListener.h; sourceTree = SOURCE_ROOT; };
 		71FFD50EA75BCC76F0C58D12 /* SyphonNameboundClient.h */ = {isa = PBXFileReference; explicitFileType = sourcecode.c.h; fileEncoding = 30; name = SyphonNameboundClient.h; path = ../../../addons/ofxSyphon/libs/Syphon/src/SyphonNameboundClient.h; sourceTree = SOURCE_ROOT; };
@@ -801,6 +818,7 @@
 		E4B69B4A0A3A1720003C02F2 = {
 			isa = PBXGroup;
 			children = (
+				63F0B3241BB71FD90018F890 /* settings.xml */,
 				E4B6FCAD0C3E899E008CF71C /* openFrameworks-Info.plist */,
 				E4EB6923138AFD0F00A09F29 /* Project.xcconfig */,
 				E4B69E1C0A3A1BDC003C02F2 /* src */,
@@ -814,6 +832,8 @@
 		E4B69E1C0A3A1BDC003C02F2 /* src */ = {
 			isa = PBXGroup;
 			children = (
+				63F0B3271BB71FFA0018F890 /* shader.frag */,
+				63F0B3281BB71FFA0018F890 /* shader.vert */,
 				63B7F5F01BAEFBDE00B19F8D /* FireflyHub.cpp */,
 				63B7F5F11BAEFBDE00B19F8D /* FireflyHub.h */,
 				63B7F5F21BAEFBDE00B19F8D /* SerialHub.cpp */,
@@ -830,12 +850,11 @@
 				63B7F5DA1BAEE7E500B19F8D /* LedManager.h */,
 				63B7F5DB1BAEE7E500B19F8D /* LedStrip.cpp */,
 				63B7F5DC1BAEE7E500B19F8D /* LedStrip.h */,
-				63B7F5DD1BAEE7E500B19F8D /* main.cpp */,
 				63B7F5DE1BAEE7E500B19F8D /* ofApp.cpp */,
 				63B7F5DF1BAEE7E500B19F8D /* ofApp.h */,
+				63B7F5DD1BAEE7E500B19F8D /* main.cpp */,
 				63B7F5E01BAEE7E500B19F8D /* ofxTimer.cpp */,
 				63B7F5E11BAEE7E500B19F8D /* ofxTimer.h */,
-				63B7F5E41BAEE7E500B19F8D /* SpoutToPixelThread.h */,
 			);
 			path = src;
 			sourceTree = SOURCE_ROOT;
@@ -885,6 +904,7 @@
 				E4B6FFFD0C3F9AB9008CF71C /* ShellScript */,
 				E4C2427710CC5ABF004149E2 /* CopyFiles */,
 				A3FA15E81B6A1B3700E9DAEA /* CopyFiles */,
+				63F0B3261BB71FDF0018F890 /* CopyFiles */,
 			);
 			buildRules = (
 			);
