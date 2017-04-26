@@ -31,7 +31,7 @@ LedManager::LedManager()
 	ledMapPixels.allocate(256,256,OF_IMAGE_COLOR);
 	ledPixels.allocate(256,256,OF_IMAGE_COLOR_ALPHA);
 
-	int imgSize = ledMapImage.width*ledMapImage.height;
+	int imgSize = ledMapImage.getWidth()*ledMapImage.getHeight();
 
 	updateLedMap();
 

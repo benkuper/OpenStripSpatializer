@@ -7,8 +7,9 @@ string resourcePath;
 
 //========================================================================
 int main( ){
-	ofSetCurrentRenderer(ofGLProgrammableRenderer::TYPE);
-	ofSetupOpenGL(1024,768,OF_WINDOW);			// <-------- setup the GL context
+	ofGLWindowSettings settings;
+	settings.setGLVersion(4, 5); /// < select your GL Version here
+	ofCreateWindow(settings); ///< create your window here
 
 #ifdef __APPLE__
     // Change the root folder for relative path : set it to Contents/Resources/ inside the .app bundle, instead of data/ folder next to the .app file.

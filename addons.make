@@ -1,4 +1,5 @@
-ofxOsc
-ofxXmlSettings
 ofxNetwork
+ofxOsc
+ofxSpout
 ofxUI
+ofxXmlSettings
